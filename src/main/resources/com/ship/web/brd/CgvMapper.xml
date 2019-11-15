@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ship.web.brd.CgvMapper">
+    
+    <insert id="insertCgv" parameterType="map" >
+        INSERT INTO cgv (CONTENT) VALUES (
+              #{content})
+    </insert>
+    <select id="countCgv" resultType="string">
+    		SELECT COUNT(id) FROM cgv 
+    </select>
+    
+    <select id="selectList" resultType="Cgv" parameterType="Proxy">
+    SELECT id AS id, A.* FROM
+				(SELECT *
+				 FROM cgv
+	 			 ORDER BY id DESC) A
+ 			LIMIT #{startRow},#{pageSize}
+    </select>
+  	<delete id ="deleteCgv" parameterType="Cgv">
+  			DELETE 
+			FROM cgv
+			WHERE id = #{id}
+  	</delete>
+  	<update id="updateCgv" parameterType="Cgv">
+  			UPDATE cgv 
+			SET CONTENT = #{content}, TITLE = #{title}
+			WHERE id = #{id}
+  	</update>
+  	
+</mapper>
